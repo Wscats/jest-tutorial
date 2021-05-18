@@ -1,0 +1,26 @@
+{
+  "name": "mjest",
+  "version": "3.0.0",
+  "description": "mini jest implementation",
+  "main": "index.js",
+  "bin": {
+    "mjest": "./bin/mjest.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sulirc/mjest.git"
+  },
+  "keywords": [],
+  "author": "sulirc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sulirc/mjest/issues"
+  },
+  "homepage": "https://github.com/sulirc/mjest#readme",
+  "dependencies": {
+    "uuid": "^8.3.0"
+  }
+}
