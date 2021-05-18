@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        window.jest = {
+            fn: (impl = () => { }) => {
+                const mockFn = (...args) => {
+                    // 主动收集函数入参
+                    mockFn.mock.calls.push(args);
+                    // 执行原函数
+                    return impl(...args);
+                };
+                // 保存原函数
+                mockFn.originImpl = impl;
+                // 保存函数入参
+                mockFn.mock = { calls: [] };
+                return mockFn;
+            },
+        };
+
+        const mockFn = jest.fn(() => {
+            console.log(1);
+        });
+        mockFn(123);
+        // 原函数
+        console.log(mockFn.originImpl);
+        // 函数入参
+        console.log(mockFn.mock);
+    </script>
+</body>
+
+</html>
