@@ -1,26 +1,24 @@
 {
-  "name": "mjest",
-  "version": "3.0.0",
-  "description": "mini jest implementation",
+  "name": "mini-jest",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "bin": {
-    "mjest": "./bin/mjest.js"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node index ./test.spec.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sulirc/mjest.git"
+    "url": "git+https://github.com/Wscats/mini-jest.git"
   },
-  "keywords": [],
-  "author": "sulirc",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sulirc/mjest/issues"
+    "url": "https://github.com/Wscats/mini-jest/issues"
   },
-  "homepage": "https://github.com/sulirc/mjest#readme",
+  "homepage": "https://github.com/Wscats/mini-jest#readme",
   "dependencies": {
-    "uuid": "^8.3.0"
+    "@jest/core": "^27.0.6",
+    "jest-config": "^27.0.6",
+    "jest-watcher": "^27.0.6"
   }
 }
