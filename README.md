@@ -509,7 +509,9 @@ const runtime = new Runtime(
 );
 ```
 
-这里使用 `@jest/console` 包改写全局的 console，为了单测的文件代码块的 console 能顺利在 node 终端打印结果，配合 `jest-environment-node` 包，把全局的 `environment.global` 全部改写，方便后续在 vm 中能得到这些作用域的方法，涉及到改写的 `global` 方法有如下：
+# jest-environment-node
+
+这里使用 `@jest/console` 包改写全局的 console，为了单测的文件代码块的 console 能顺利在 node 终端打印结果，配合 `jest-environment-node` 包，把全局的 `environment.global` 全部改写，方便后续在 vm 中能得到这些作用域的方法，本质上就是为 vm 的运行环境提供的作用域，为后续注入 `global` 提供便利，涉及到改写的 `global` 方法有如下：
 
 - global.global
 - global.clearInterval
