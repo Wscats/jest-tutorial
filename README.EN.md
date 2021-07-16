@@ -1,3 +1,5 @@
+[English](https://github.com/Wscats/jest-tutorial/blob/vm/README.EN.md) | [中文](https://github.com/Wscats/jest-tutorial/blob/vm/README.md)
+
 # Explain the implementation principle of the Jest framework in a simple way
 
 # What is Jest
