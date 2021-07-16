@@ -12,12 +12,32 @@ const dispatch = event => {
             const { testBlock } = global["STATE_SYMBOL"];
             testBlock.push({ fn, name });
             break;
+        case 'BEFORE_EACH':
+            const { beforeEachBlock } = global["STATE_SYMBOL"];
+            beforeEachBlock.push(fn);
+            break;
+        case 'BEFORE_ALL':
+            const { beforeAllBlock } = global["STATE_SYMBOL"];
+            beforeAllBlock.push(fn);
+            break;
+        case 'AFTER_EACH':
+            const { afterEachBlock } = global["STATE_SYMBOL"];
+            afterEachBlock.push(fn);
+            break;
+        case 'AFTER_ALL':
+            const { afterAllBlock } = global["STATE_SYMBOL"];
+            afterAllBlock.push(fn);
+            break;
     }
 };
 
 const createState = () => {
     global["STATE_SYMBOL"] = {
         testBlock: [],
+        beforeEachBlock: [],
+        beforeAllBlock: [],
+        afterEachBlock: [],
+        afterAllBlock: [],
     };
 };
 
@@ -61,11 +81,17 @@ const expect = (actual) => ({
     },
 });
 
+const afterAll = () => { };
+
 const context = {
     console: console.Console({ stdout: process.stdout, stderr: process.stderr }),
     jest,
     expect,
     require,
+    afterAll: (fn) => dispatch({ type: 'AFTER_ALL', fn }),
+    afterEach: (fn) => dispatch({ type: 'AFTER_EACH', fn }),
+    beforeAll: (fn) => dispatch({ type: 'BEFORE_ALL', fn }),
+    beforeEach: (fn) => dispatch({ type: 'BEFORE_EACH', fn }),
     test: (name, fn) => dispatch({ type: 'ADD_TEST', fn, name })
 };
 
@@ -74,17 +100,21 @@ const start = new Date();
 vm.createContext(context);
 vm.runInContext(code, context);
 
-const { testBlock } = global["STATE_SYMBOL"];
+const { testBlock, beforeEachBlock, beforeAllBlock, afterEachBlock, afterAllBlock } = global["STATE_SYMBOL"];
 
+beforeAllBlock.forEach(async (beforeAll) => await beforeAll());
 testBlock.forEach(async (item) => {
     const { fn, name } = item;
     try {
+        beforeEachBlock.forEach(async (beforeEach) => await beforeEach());
         await fn.apply(this);
+        afterEachBlock.forEach(async (afterEach) => await afterEach());
         log('\x1b[32m%s\x1b[0m', `√ ${name} passed`);
     } catch {
         log('\x1b[32m%s\x1b[0m', `× ${name} error`);
     }
 });
+afterAllBlock.forEach(async (afterAll) => await afterAll());
 
 const end = new Date();
 log('\x1b[32m%s\x1b[0m', `Time: ${end - start}ms`);
