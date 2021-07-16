@@ -90,7 +90,7 @@ const context = {
     afterEach: (fn) => dispatch({ type: 'AFTER_EACH', fn }),
     beforeAll: (fn) => dispatch({ type: 'BEFORE_ALL', fn }),
     beforeEach: (fn) => dispatch({ type: 'BEFORE_EACH', fn }),
-    test: (name, fn) => dispatch({ type: 'ADD_TEST', fn, name })
+    test: (name, fn) => dispatch({ type: 'ADD_TEST', fn, name }),
 };
 
 const start = new Date();
