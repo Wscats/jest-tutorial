@@ -81,8 +81,6 @@ const expect = (actual) => ({
     },
 });
 
-const afterAll = () => { };
-
 const context = {
     console: console.Console({ stdout: process.stdout, stderr: process.stderr }),
     jest,
