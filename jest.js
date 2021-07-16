@@ -1,3 +1,8 @@
+/**
+ * Copyright © 1998 - 2021 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
+
 const vm = require('vm');
 const path = require('path');
 const fs = require('fs');
