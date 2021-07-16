@@ -1,5 +1,5 @@
 jest.mock('fs', {
-    readFile: () => 'wscats',
+    readFile: jest.fn(() => 'wscats'),
 });
 
 const fs = require('fs');
