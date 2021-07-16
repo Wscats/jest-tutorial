@@ -1,5 +1,5 @@
 {
-  "name": "mini-jest",
+  "name": "jest-tutorial",
   "version": "1.0.0",
   "description": "",
   "main": "jest.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Wscats/mini-jest.git"
+    "url": "git+https://github.com/Wscats/jest-tutorial.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Wscats/mini-jest/issues"
+    "url": "https://github.com/Wscats/jest-tutorial/issues"
   },
-  "homepage": "https://github.com/Wscats/mini-jest#readme"
+  "homepage": "https://github.com/Wscats/jest-tutorial#readme"
 }
