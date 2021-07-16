@@ -2,9 +2,9 @@
   "name": "mini-jest",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "jest.js",
   "scripts": {
-    "dev": "node index ./test.spec.js"
+    "dev": "node jest ./test.spec.js"
   },
   "repository": {
     "type": "git",
@@ -15,10 +15,5 @@
   "bugs": {
     "url": "https://github.com/Wscats/mini-jest/issues"
   },
-  "homepage": "https://github.com/Wscats/mini-jest#readme",
-  "dependencies": {
-    "@jest/core": "^27.0.6",
-    "jest-config": "^27.0.6",
-    "jest-watcher": "^27.0.6"
-  }
+  "homepage": "https://github.com/Wscats/mini-jest#readme"
 }

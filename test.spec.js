@@ -1,7 +1,11 @@
+jest.mock('fs', {
+    readFile: () => 'wscats',
+});
+
+const fs = require('fs');
 const sum = (a, b) => a + b;
-test('sumAsync adds numbers asynchronously', () => {
-    console.log('const result = sum(3, 7);');
-    const result = sum(3, 7);
-    const expected = 10;
-    expect(result).toBe(expected);
+describe('sumTest', () => {
+    const text = fs.readFile();
+    expect(text).toBe('wscats');
+    expect(sum(1, 2)).toBe(3);
 });
