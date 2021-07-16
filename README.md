@@ -8,13 +8,13 @@ Jest 作为 NPM 包发布，可以安装并运行在任何 JavaScript 项目中�
 
 # 测试意味着什么
 
-在技​​术术语中，测试意味着检查我们的代码是否满足某些期望。例如：一个名为求和(`sum`)函数应该返回给定一些运算结果的预期输出。
+在技 ​​ 术术语中，测试意味着检查我们的代码是否满足某些期望。例如：一个名为求和(`sum`)函数应该返回给定一些运算结果的预期输出。
 
 有许多类型的测试，很快你就会被术语淹没，但长话短说的测试分为三大类：
 
 - 单元测试
 - 集成测试
-- E2E测试
+- E2E 测试
 
 # 我怎么知道要测试什么
 
@@ -51,9 +51,10 @@ const sum = (a, b) => a + b;
 `test` 它需要两个参数：一个用于描述测试块的字符串，以及一个用于包装实际测试的回调函数。`expect` 包装目标函数，并结合匹配器 `toBe` 用于检查函数计算结果是否符合预期。
 
 这是完整的测试：
+
 ```js
-test('sum test', () => {
-    expect(sum(1, 2)).toBe(3);
+test("sum test", () => {
+  expect(sum(1, 2)).toBe(3);
 });
 ```
 
@@ -69,7 +70,7 @@ test('sum test', () => {
 
 ```js
 const test = (name, fn) => {
-    dispatch({ type: 'ADD_TEST', fn, name });
+  dispatch({ type: "ADD_TEST", fn, name });
 };
 ```
 
@@ -77,21 +78,21 @@ const test = (name, fn) => {
 
 ```js
 global["STATE_SYMBOL"] = {
-    testBlock: [],
+  testBlock: [],
 };
 ```
 
 `dispatch` 方法此时只需要甄别对应的命令，并把测试的回调函数存进全局的 `state` 即可。
 
 ```js
-const dispatch = event => {
-    const { fn, type, name } = event;
-    switch (type) {
-        case 'ADD_TEST':
-            const { testBlock } = global["STATE_SYMBOL"];
-            testBlock.push({ fn, name });
-            break;
-    }
+const dispatch = (event) => {
+  const { fn, type, name } = event;
+  switch (type) {
+    case "ADD_TEST":
+      const { testBlock } = global["STATE_SYMBOL"];
+      testBlock.push({ fn, name });
+      break;
+  }
 };
 ```
 
@@ -121,7 +122,7 @@ const expect = (actual) => ({
 
 编写完测试之后，我们则需要在命令行中输入命令运行单测，正常情况下，命令类似如下：
 
-> `node jest xxx.spec.js` 
+> `node jest xxx.spec.js`
 
 这里本质是解析命令行的参数。
 
@@ -141,8 +142,8 @@ const code = fs.readFileSync(path.join(process.cwd(), testPath)).toString();
 简而言之，可以通过将以下代码片段分配给函数或依赖项来创建模拟：
 
 ```js
-jest.mock('fs', {
-    readFile: jest.fn(() => 'wscats'),
+jest.mock("fs", {
+  readFile: jest.fn(() => "wscats"),
 });
 ```
 
@@ -154,15 +155,15 @@ jest.mock('fs', {
 
 ```js
 const jest = {
-    mock(mockPath, mockExports = {}) {
-        const path = require.resolve(mockPath, { paths: ['.'] });
-        require.cache[path] = {
-            id: path,
-            filename: path,
-            loaded: true,
-            exports: mockExports,
-        };
-    }
+  mock(mockPath, mockExports = {}) {
+    const path = require.resolve(mockPath, { paths: ["."] });
+    require.cache[path] = {
+      id: path,
+      filename: path,
+      loaded: true,
+      exports: mockExports,
+    };
+  },
 };
 ```
 
@@ -172,15 +173,15 @@ const jest = {
 
 ```js
 const jest = {
-    fn(impl = () => { }) {
-        const mockFn = (...args) => {
-            mockFn.mock.calls.push(args);
-            return impl(...args);
-        };
-        mockFn.originImpl = impl;
-        mockFn.mock = { calls: [] };
-        return mockFn;
-    }
+  fn(impl = () => {}) {
+    const mockFn = (...args) => {
+      mockFn.mock.calls.push(args);
+      return impl(...args);
+    };
+    mockFn.originImpl = impl;
+    mockFn.mock = { calls: [] };
+    return mockFn;
+  },
 };
 ```
 
@@ -194,15 +195,15 @@ const jest = {
 
 ```js
 const context = {
-    console: console.Console({ stdout: process.stdout, stderr: process.stderr }),
-    jest,
-    expect,
-    require,
-    test: (name, fn) => dispatch({ type: 'ADD_TEST', fn, name })
+  console: console.Console({ stdout: process.stdout, stderr: process.stderr }),
+  jest,
+  expect,
+  require,
+  test: (name, fn) => dispatch({ type: "ADD_TEST", fn, name }),
 };
 ```
 
-注入完作用域，我们就可以让测试文件的代码在 V8 虚拟机中跑起来，这里我传入的代码是已经处理成字符串的代码，Jest 这里会在这里做一些代码加工，安全处理和 SourceMap缝补等操作，我们示例就不需要搞那么复杂了。
+注入完作用域，我们就可以让测试文件的代码在 V8 虚拟机中跑起来，这里我传入的代码是已经处理成字符串的代码，Jest 这里会在这里做一些代码加工，安全处理和 SourceMap 缝补等操作，我们示例就不需要搞那么复杂了。
 
 ```js
 vm.runInContext(code, context);
@@ -213,7 +214,7 @@ vm.runInContext(code, context);
 ```js
 const start = new Date();
 const end = new Date();
-log('\x1b[32m%s\x1b[0m', `Time: ${end - start}ms`);
+log("\x1b[32m%s\x1b[0m", `Time: ${end - start}ms`);
 ```
 
 ## 运行单测回调
@@ -222,22 +223,45 @@ V8 虚拟机执行完毕之后，全局的 `state` 就会收集到测试块中�
 
 ```js
 testBlock.forEach(async (item) => {
-    const { fn, name } = item;
-    try {
-        await fn.apply(this);
-        log('\x1b[32m%s\x1b[0m', `√ ${name} passed`);
-    } catch {
-        log('\x1b[32m%s\x1b[0m', `× ${name} error`);
-    }
+  const { fn, name } = item;
+  try {
+    await fn.apply(this);
+    log("\x1b[32m%s\x1b[0m", `√ ${name} passed`);
+  } catch {
+    log("\x1b[32m%s\x1b[0m", `× ${name} error`);
+  }
 });
 ```
 
-至此，我们就实现了一个简单的测试框架了，我们可以在此基础上，增加 `beforeEach` `afterAll` 和 `beforeAll` 等钩子函数，也可以丰富断言方法，匹配器和支持参数配置，下面附读源码的个人笔记。
+## 钩子函数
 
+我们还可以在单测执行过程中加入生命周期，例如 `beforeEach`，`afterEach`，`afterAll` 和 `beforeAll` 等钩子函数。
+
+在上面的基础架构上增加钩子函数，其实就是在执行 test 的每个过程中注入对应回调函数，比如 `beforeEach` 就是放在 `testBlock` 遍历执行测试函数前，`afterEach` 就是放在 `testBlock` 遍历执行测试函数后，非常的简单，只需要位置放对就可以暴露任何时期的钩子函数。
+
+```js
+testBlock.forEach(async (item) => {
+  const { fn, name } = item;
++ beforeEachBlock.forEach(async (beforeEach) => await beforeEach());
+  await fn.apply(this);
++ afterEachBlock.forEach(async (afterEach) => await afterEach());
+});
+```
+
+而 `beforeAll` 和 `afterAll` 就可以放在，`testBlock` 所有测试运行完毕前和后。
+
+```js
++ beforeAllBlock.forEach(async (beforeAll) => await beforeAll());
+  testBlock.forEach(async (item) => {})
++ afterAllBlock.forEach(async (afterAll) => await afterAll());
+```
+
+至此，我们就实现了一个简单的测试框架了，我们可以在此基础上，丰富断言方法，匹配器和支持参数配置，下面附读源码的个人笔记。
 
 # jest-cli
 
 下载 Jest 源码，根目录下执行
+
 ```bash
 yarn
 npm run build
@@ -262,8 +286,8 @@ const transformed = babel.transformFileSync(file, options).code;
 而 buildTs.js 本质上是使用了 tsc 命令，把 ts 文件编译到 build 文件夹中，使用 execa 库来执行命令:
 
 ```js
-const args = ['tsc', '-b', ...packagesWithTs, ...process.argv.slice(2)];
-await execa('yarn', args, {stdio: 'inherit'});
+const args = ["tsc", "-b", ...packagesWithTs, ...process.argv.slice(2)];
+await execa("yarn", args, { stdio: "inherit" });
 ```
 
 ![image](https://user-images.githubusercontent.com/17243165/115947329-84fe4380-a4f9-11eb-9df2-02cf8fdadd08.png)
@@ -290,14 +314,14 @@ node ./packages/jest-cli/bin/jest.js /path/test.spec.js
 就会执行 `jest.js` 文件，然后进入到 `build/cli` 文件中的 run 方法，run 方法会对命令中各种的参数做解析，具体原理是 yargs 库配合 process.argv 实现
 
 ```js
-const importLocal = require('import-local');
+const importLocal = require("import-local");
 
 if (!importLocal(__filename)) {
   if (process.env.NODE_ENV == null) {
-    process.env.NODE_ENV = 'test';
+    process.env.NODE_ENV = "test";
   }
 
-  require('../build/cli').run();
+  require("../build/cli").run();
 }
 ```
 
@@ -305,37 +329,48 @@ if (!importLocal(__filename)) {
 
 当获取各种命令参数后，就会执行 `runCLI` 核心的方法，它是 `@jest/core -> packages/jest-core/src/cli/index.ts` 库的核心方法。
 
-
 ```js
-import {runCLI} from '@jest/core';
+import { runCLI } from "@jest/core";
 const outputStream = argv.json || argv.useStderr ? process.stderr : process.stdout;
-const {results, globalConfig} = await runCLI(argv, projects);
+const { results, globalConfig } = await runCLI(argv, projects);
 ```
 
-`runCLI` 方法中会使用刚才命令中解析好的传入参数  argv 来配合 `readConfigs` 方法读取配置文件的信息，`readConfigs` 来自于 `packages/jest-config/src/index.ts`，这里会有 normalize 填补和初始化一些默认配置好的参数，它的默认参数在 `packages/jest-config/src/Defaults.ts` 文件中记录，比如：如果只运行 js 单测，会默认设置 `require.resolve('jest-runner')` 为运行单测的 runner，还会配合 chalk 库生成 outputStream 输出内容到控制台。
+`runCLI` 方法中会使用刚才命令中解析好的传入参数 argv 来配合 `readConfigs` 方法读取配置文件的信息，`readConfigs` 来自于 `packages/jest-config/src/index.ts`，这里会有 normalize 填补和初始化一些默认配置好的参数，它的默认参数在 `packages/jest-config/src/Defaults.ts` 文件中记录，比如：如果只运行 js 单测，会默认设置 `require.resolve('jest-runner')` 为运行单测的 runner，还会配合 chalk 库生成 outputStream 输出内容到控制台。
 
-这里顺便提一下引入 jest  引入模块的原理思路，这里先会 `require.resolve(moduleName)` 找到模块的路径，并把路径存到配置里面，然后使用工具库 `packages/jest-util/src/requireOrImportModule.ts` 的 `requireOrImportModule` 方法调用封装好的原生 `import/reqiure` 方法配合配置文件中的路径把模块取出来。
+这里顺便提一下引入 jest 引入模块的原理思路，这里先会 `require.resolve(moduleName)` 找到模块的路径，并把路径存到配置里面，然后使用工具库 `packages/jest-util/src/requireOrImportModule.ts` 的 `requireOrImportModule` 方法调用封装好的原生 `import/reqiure` 方法配合配置文件中的路径把模块取出来。
 
 - globalConfig 来自于 argv 的配置
 - configs 来自于 jest.config.js 的配置
 
 ```ts
-const {globalConfig, configs, hasDeprecationWarnings} = await readConfigs(argv, projects);
+const { globalConfig, configs, hasDeprecationWarnings } = await readConfigs(
+  argv,
+  projects
+);
 
-if (argv.debug) { /*code*/ }
-if (argv.showConfig) { /*code*/ }
-if (argv.clearCache) { /*code*/ }
-if (argv.selectProjects) { /*code*/ }
+if (argv.debug) {
+  /*code*/
+}
+if (argv.showConfig) {
+  /*code*/
+}
+if (argv.clearCache) {
+  /*code*/
+}
+if (argv.selectProjects) {
+  /*code*/
+}
 ```
 
 # jest-haste-map
 
 jest-haste-map 用于获取项目中的所有文件以及它们之间的依赖关系，它通过查看 `import/require` 调用来实现这一点，从每个文件中提取它们并构建一个映射，其中包含每个文件及其依赖项，这里的 Haste 是 Facebook 使用的模块系统，它还有一个叫做 HasteContext 的东西，因为它有 HastFS（Haste 文件系统），HastFS 只是系统中文件的列表以及与之关联的所有依赖项，它是一种地图数据结构，其中键是路径，值是元数据，这里生成的 `contexts` 会一直被沿用到 `onRunComplete` 阶段。
+
 ```ts
 const { contexts, hasteMapInstances } = await buildContextsAndHasteMaps(
-    configs,
-    globalConfig,
-    outputStream,
+  configs,
+  globalConfig,
+  outputStream
 );
 ```
 
@@ -356,18 +391,18 @@ contexts.map(async (context, index) => {
     outputStream,
     changedFilesPromise && (await changedFilesPromise),
     jestHooks,
-    filter,
+    filter
   );
   allTests = allTests.concat(matches.tests);
-  return {context, matches};
-})
+  return { context, matches };
+});
 ```
 
 并使用 `Sequencer` 方法对单测进行排序
 
 ```ts
 const Sequencer: typeof TestSequencer = await requireOrImportModule(
-  globalConfig.testSequencer,
+  globalConfig.testSequencer
 );
 const sequencer = new Sequencer();
 allTests = await sequencer.sort(allTests);
@@ -378,8 +413,8 @@ allTests = await sequencer.sort(allTests);
 ```ts
 const results = await new TestScheduler(
   globalConfig,
-  {startRun},
-  testSchedulerContext,
+  { startRun },
+  testSchedulerContext
 ).scheduleTests(allTests, testWatcher);
 ```
 
@@ -393,16 +428,15 @@ const results = await new TestScheduler(
 接着把 `contexts` 遍历并用一个新的空对象 `testRunners` 做一些处理存起来，里面会调用 `@jest/transform` 提供的 `createScriptTransformer` 方法来处理引入的模块。
 
 ```ts
-import {createScriptTransformer} from '@jest/transform';
+import { createScriptTransformer } from "@jest/transform";
 
 const transformer = await createScriptTransformer(config);
 const Runner: typeof TestRunner = interopRequireDefault(
-  transformer.requireAndTranspileModule(config.runner),
+  transformer.requireAndTranspileModule(config.runner)
 ).default;
 const runner = new Runner(this._globalConfig, {
   changedFiles: this._context?.changedFiles,
-  sourcesRelatedToTestsInChangedFiles: this._context
-    ?.sourcesRelatedToTestsInChangedFiles,
+  sourcesRelatedToTestsInChangedFiles: this._context?.sourcesRelatedToTestsInChangedFiles,
 });
 testRunners[config.runner] = runner;
 ```
@@ -434,36 +468,42 @@ async runTests(tests, watcher, onStart, onResult, onFailure, options) {
 - `_createInBandTestRun` 里面会执行 `packages/jest-runner/src/runTest.ts` 一个核心方法 `runTest`，而 `runJest` 里面就执行一个方法 `runTestInternal`，这里面会在执行单测前准备非常多的东西，涉及全局方法改写和引入和导出方法的劫持。
 
 ```ts
-await this.eventEmitter.emit('test-file-start', [test]);
+await this.eventEmitter.emit("test-file-start", [test]);
 return runTest(
   test.path,
   this._globalConfig,
   test.context.config,
   test.context.resolver,
   this._context,
-  sendMessageToJest,
+  sendMessageToJest
 );
 ```
 
 在 `runTestInternal` 方法中会使用 `fs` 模块读取文件的内容放入 `cacheFS`，缓存起来方便以后快读读取，比如后面如果文件的内容是 json 就可以直接在 `cacheFS` 读取，也会使用 `Date.now` 时间差计算耗时。
 
 ```ts
-const testSource = fs().readFileSync(path, 'utf8');
+const testSource = fs().readFileSync(path, "utf8");
 const cacheFS = new Map([[path, testSource]]);
 ```
 
 在 `runTestInternal` 方法中会引入 `packages/jest-runtime/src/index.ts`，它会帮你缓存模块和读取模块并触发执行。
 
 ```ts
-const runtime = new Runtime(config, environment, resolver, transformer, cacheFS, {
+const runtime = new Runtime(
+  config,
+  environment,
+  resolver,
+  transformer,
+  cacheFS,
+  {
     changedFiles: context?.changedFiles,
     collectCoverage: globalConfig.collectCoverage,
     collectCoverageFrom: globalConfig.collectCoverageFrom,
     collectCoverageOnlyFrom: globalConfig.collectCoverageOnlyFrom,
     coverageProvider: globalConfig.coverageProvider,
-    sourcesRelatedToTestsInChangedFiles:
-      context?.sourcesRelatedToTestsInChangedFiles,
-  }, path,
+    sourcesRelatedToTestsInChangedFiles: context?.sourcesRelatedToTestsInChangedFiles,
+  },
+  path
 );
 ```
 
@@ -478,7 +518,7 @@ const environment = new TestEnvironment(config, {
   testPath: path,
 });
 // 真正改写 console 的方法
-setGlobal(environment.global, 'console', testConsole);
+setGlobal(environment.global, "console", testConsole);
 ```
 
 `runtime` 主要用这两个方法加载模块，先判断是否 ESM 模块，如果是，使用 `runtime.unstable_importModule` 加载模块并运行该模块，如果不是，则使用 `runtime.requireModule` 加载模块并运行该模块。
@@ -518,13 +558,18 @@ if (esm) {
 当运行完 `initialize` 方法初始化之后，由于 `initialize` 改写了全局的 `describe` 和 `test` 等方法，这些方法都在 `/packages/jest-circus/src/index.ts` 这里改写，这里注意 `test` 方法里面有一个 `dispatchSync` 方法，这是一个关键的方法，这里会在全局维护一份 `state`，`dispatchSync` 就是把 `test` 代码块里面的函数等信息存到 `state` 里面，`dispatchSync` 里面使用 `name` 配合 `eventHandler` 方法来修改 `state`，这个思路非常像 redux 里面的数据流。
 
 ```ts
-const test: Global.It = (() => {
-  return test = (testName, fn, timeout) => (testName, mode, fn, testFn, timeout) => {
+const test: Global.It = () => {
+  return (test = (testName, fn, timeout) => (testName, mode, fn, testFn, timeout) => {
     return dispatchSync({
-      asyncError, fn, mode, name: 'add_test', testName, timeout,
+      asyncError,
+      fn,
+      mode,
+      name: "add_test",
+      testName,
+      timeout,
     });
-  }
-});
+  });
+};
 ```
 
 而单测 `xxx.spec.js` 即 testPath 文件会在 `initialize` 之后会被引入并执行，注意这里引入就会执行这个单测，由于单测 `xxx.spec.js` 文件里面按规范写，会有 `test` 和 `describe` 等代码块，所以这个时候所有的 `test` 和 `describe` 接受的回调函数都会被存到全局的 `state` 里面。
@@ -546,13 +591,13 @@ if (esm) {
 this._loadModule(localModule, from, moduleName, modulePath, options, moduleRegistry);
 ```
 
-_loadModule 的逻辑只有三个主要部分
+\_loadModule 的逻辑只有三个主要部分
 
 - 判断是否 json 后缀文件，执行 readFile 读取文本，用 transformJson 和 JSON.parse 转格输出内容。
 - 判断是否 node 后缀文件，执行 require 原生方法引入模块。
-- 不满足上述两个条件的文件，执行 _execModule 执行模块。
+- 不满足上述两个条件的文件，执行 \_execModule 执行模块。
 
-_execModule 中会使用 babel 来转化 fs 读取到的源代码，这个 `transformFile` 就是 `packages/jest-runtime/src/index.ts` 的 `transform` 方法。
+\_execModule 中会使用 babel 来转化 fs 读取到的源代码，这个 `transformFile` 就是 `packages/jest-runtime/src/index.ts` 的 `transform` 方法。
 
 ```ts
 const transformedCode = this.transformFile(filename, options);
@@ -560,40 +605,36 @@ const transformedCode = this.transformFile(filename, options);
 
 ![image](https://user-images.githubusercontent.com/17243165/119518220-ea6c7b00-bdaa-11eb-8723-d8bb89673acf.png)
 
-_execModule中会使用 `createScriptFromCode` 方法调用 node 的原生 vm 模块来真正的执行 js，vm 模块接受安全的源代码，并用 V8 虚拟机配合传入的上下文来立即执行代码或者延时执行代码，这里可以接受不同的作用域来执行同一份代码来运算出不同的结果，非常合适测试框架的使用，这里的注入的 vmContext 就是上面全局改写作用域包含 afterAll，afterEach，beforeAll，beforeEach，describe，it，test，所以我们的单测代码在运行的时候就会得到拥有注入作用域的这些方法。
+\_execModule 中会使用 `createScriptFromCode` 方法调用 node 的原生 vm 模块来真正的执行 js，vm 模块接受安全的源代码，并用 V8 虚拟机配合传入的上下文来立即执行代码或者延时执行代码，这里可以接受不同的作用域来执行同一份代码来运算出不同的结果，非常合适测试框架的使用，这里的注入的 vmContext 就是上面全局改写作用域包含 afterAll，afterEach，beforeAll，beforeEach，describe，it，test，所以我们的单测代码在运行的时候就会得到拥有注入作用域的这些方法。
 
 ```ts
-const vm = require('vm');
+const vm = require("vm");
 const script = new vm().Script(scriptSourceCode, option);
 const filename = module.filename;
 const vmContext = this._environment.getVmContext();
 script.runInContext(vmContext, {
-  filename
+  filename,
 });
 ```
 
 ![image](https://user-images.githubusercontent.com/17243165/125756054-4c144a7a-447a-4b5b-973e-e3075b06daa0.png)
 
-
 当上面复写全局方法和保存好 `state` 之后，会进入到真正执行 `describe` 的回调函数的逻辑里面，在 `packages/jest-circus/src/run.ts` 的 `run` 方法里面，这里使用 `getState` 方法把 `describe` 代码块取出来，然后使用 `_runTestsForDescribeBlock` 执行这个函数，然后进入到 `_runTest` 方法，然后使用 `_callCircusHook` 执行前后的钩子函数，使用 `_callCircusTest` 执行。
 
 ```ts
 const run = async (): Promise<Circus.RunResult> => {
-  const {rootDescribeBlock} = getState();
-  await dispatch({name: 'run_start'});
+  const { rootDescribeBlock } = getState();
+  await dispatch({ name: "run_start" });
   await _runTestsForDescribeBlock(rootDescribeBlock);
-  await dispatch({name: 'run_finish'});
-  return makeRunResult(
-    getState().rootDescribeBlock,
-    getState().unhandledErrors,
-  );
+  await dispatch({ name: "run_finish" });
+  return makeRunResult(getState().rootDescribeBlock, getState().unhandledErrors);
 };
 
 const _runTest = async (test, parentSkipped) => {
-   // beforeEach
-   // test 函数块，testContext 作用域
-   await _callCircusTest(test, testContext);
-   // afterEach
+  // beforeEach
+  // test 函数块，testContext 作用域
+  await _callCircusTest(test, testContext);
+  // afterEach
 };
 ```
 
@@ -601,4 +642,4 @@ const _runTest = async (test, parentSkipped) => {
 
 # 最后
 
-希望本文能够帮助大家理解 Jest 测试框架的核心实现和原理，感谢大家耐心的阅读，如果文章和笔记能带您一丝帮助或者启发，请不要吝啬你的 Star 和 Fork，文章同步持续更新，你的肯定是我前进的最大动力😁
+希望本文能够帮助大家理解 Jest 测试框架的核心实现和原理，感谢大家耐心的阅读，如果文章和笔记能带您一丝帮助或者启发，请不要吝啬你的 Star 和 Fork，文章同步持续更新，你的肯定是我前进的最大动力 😁
