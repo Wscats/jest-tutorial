@@ -2,6 +2,8 @@
 
 # 深入浅出 Jest 框架的实现原理
 
+[https://github.com/Wscats/jest-tutorial](https://github.com/Wscats/jest-tutorial)
+
 # 什么是 Jest
 
 Jest 是 Facebook 开发的 Javascript 测试框架，用于创建、运行和编写测试的 JavaScript 库。
