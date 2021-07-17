@@ -553,7 +553,7 @@ Before calling the single test here, the `jestAdapter` function, which is the ab
 - runtime.restoreAllMocks
 - runtime.requireModule or runtime.unstable_importModule
 
-After running the initialization of the `initialize` method, because `initialize` has rewritten the global `describe` and `test` methods, these methods are all rewritten here in `/packages/jest-circus/src/index.ts`, here Note that there is a `dispatchSync` method in the `test` method. This is a key method. Here, a copy of `state` will be maintained globally. `dispatchSync` means to store the functions and other information in the `test` code block in the `state. In `, `dispatchSync` uses `name` in conjunction with the `eventHandler` method to modify the `state`. This idea is very similar to the data flow in redux.
+After running the initialization of the `initialize` method, because `initialize` has rewritten the global `describe` and `test` methods, these methods are all rewritten here in `/packages/jest-circus/src/index.ts`, here Note that there is a `dispatchSync` method in the `test` method. This is a key method. Here, a copy of `state` will be maintained globally. `dispatchSync` means to store the functions and other information in the `test` code block in the `state`, In `dispatchSync` uses `name` in conjunction with the `eventHandler` method to modify the `state`. This idea is very similar to the data flow in redux.
 
 ```ts
 const test: Global.It = () => {
