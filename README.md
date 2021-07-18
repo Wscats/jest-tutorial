@@ -2,6 +2,8 @@
 
 # 深入浅出 Jest 框架的实现原理
 
+走进 Jest 内心，一起了解 Jest 框架是如何工作的。
+
 [https://github.com/Wscats/jest-tutorial](https://github.com/Wscats/jest-tutorial)
 
 # 什么是 Jest
