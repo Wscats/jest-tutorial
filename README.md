@@ -2,9 +2,9 @@
 
 # 深入浅出 Jest 框架的实现原理
 
-走进 Jest 内心，一起了解 Jest 框架是如何工作的。
+本文主要给大家深入了解 Jest 背后的运行原理，方便应对面试和实际业务需求，Jest 编写单测相信我们已经很熟悉了，但 Jest 是如何工作的我们可能还很陌生，那让我们一起走进 Jest 内心，一同探究。
 
-[https://github.com/Wscats/jest-tutorial](https://github.com/Wscats/jest-tutorial)
+先附代码给有需要的同学，欢迎关注：[https://github.com/Wscats/jest-tutorial](https://github.com/Wscats/jest-tutorial)
 
 # 什么是 Jest
 
