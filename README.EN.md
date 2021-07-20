@@ -2,6 +2,8 @@
 
 # Explain the implementation principle of the Jest framework in a simple way
 
+This article mainly provides you with an in-depth understanding of the operating principles behind Jest, which is convenient for responding to interviews and actual business needs. I believe we are already familiar with the preparation of Jest, but we may be very unfamiliar with how Jest works. Let us walk into Jest together. Inwardly, explore together. First attach the code to students in need, welcome to pay attention: [https://github.com/Wscats/jest-tutorial/blob/vm/README.EN.md](https://github.com/Wscats/jest-tutorial/blob/vm/README.EN.md) 
+
 # What is Jest
 
 Jest is a Javascript testing framework developed by Facebook. It is a JavaScript library for creating, running and writing tests.
