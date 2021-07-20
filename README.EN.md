@@ -643,3 +643,8 @@ This is the core position of the hook function implementation and also the core 
 # At last
 
 I hope this article can help you understand the core implementation and principles of the Jest testing framework. Thank you for reading patiently. If the articles and notes can bring you a hint of help or inspiration, please don’t be stingy with your Star and Fork. The articles are continuously updated synchronously, your affirmation Is my biggest motivation to move forward😁
+
+# Be included in
+
+- [https://medium.com/@kalone.cool/explain-the-implementation-principle-of-the-jest-framework-in-a-simple-way-222b11a55c04](https://medium.com/@kalone.cool/explain-the-implementation-principle-of-the-jest-framework-in-a-simple-way-222b11a55c04)
+- [https://softwaretestingnotes.com/](https://softwaretestingnotes.com/)
