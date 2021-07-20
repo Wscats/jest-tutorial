@@ -648,3 +648,4 @@ I hope this article can help you understand the core implementation and principl
 
 - [https://medium.com/@kalone.cool/explain-the-implementation-principle-of-the-jest-framework-in-a-simple-way-222b11a55c04](https://medium.com/@kalone.cool/explain-the-implementation-principle-of-the-jest-framework-in-a-simple-way-222b11a55c04)
 - [https://softwaretestingnotes.com/](https://softwaretestingnotes.com/)
+- [https://dev.to/wscats/explain-the-implementation-principle-of-the-jest-framework-in-a-simple-way-4dio](https://dev.to/wscats/explain-the-implementation-principle-of-the-jest-framework-in-a-simple-way-4dio)
