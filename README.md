@@ -257,9 +257,9 @@ testBlock.forEach(async (item) => {
 而 `beforeAll` 和 `afterAll` 就可以放在，`testBlock` 所有测试运行完毕前和后。
 
 ```js
-+beforeAllBlock.forEach(async (beforeAll) => await beforeAll());
+beforeAllBlock.forEach(async (beforeAll) => await beforeAll());
 testBlock.forEach(async (item) => {}) +
-  afterAllBlock.forEach(async (afterAll) => await afterAll());
+afterAllBlock.forEach(async (afterAll) => await afterAll());
 ```
 
 至此，我们就实现了一个简单的测试框架了，我们可以在此基础上，丰富断言方法，匹配器和支持参数配置，下面附读源码的个人笔记。
