@@ -1,5 +1,29 @@
 [English](https://github.com/Wscats/jest-tutorial/blob/vm/README.EN.md) | [中文](https://github.com/Wscats/jest-tutorial/blob/vm/README.md)
 
+- [什么是Jest](#什么是Jest)
+- [测试意味着什么](#测试意味着什么)
+- [我怎么知道要测试什么](#我怎么知道要测试什么)
+- [测试块，断言和匹配器](#测试块，断言和匹配器)
+	- [如何实现测试块](#如何实现测试块)
+	- [如何实现断言和匹配器](#如何实现断言和匹配器)
+  - [CLI 和配置](#CLI和配置)
+- [模拟](#模拟)
+	- [怎么模拟一个函数](#怎么模拟一个函数)
+- [执行环境](#执行环境)
+  - [作用域隔离](#作用域隔离)
+  - [V8 虚拟机](#V8虚拟机)
+  - [运行单测回调](#运行单测回调)
+  - [钩子函数](#钩子函数)
+- [生成报告](#生成报告)
+- [jest-cli](#jest-cli)
+- [jest-config](#jest-config)
+- [jest-haste-map](#jest-haste-map)
+- [jest-runner](#jest-runner)
+- [jest-environment-node](#jest-environment-node)
+- [jest-circus](#jest-circus)
+- [jest-runtime](#jest-runtime)
+- [最后&源码](#最后)
+
 # 深入浅出 Jest 框架的实现原理
 
 本文主要给大家深入了解 Jest 背后的运行原理，方便应对面试和实际业务需求，Jest 编写单测相信我们已经很熟悉了，但 Jest 是如何工作的我们可能还很陌生，那让我们一起走进 Jest 内心，一同探究。
