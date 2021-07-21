@@ -4,7 +4,7 @@
 
 本文主要给大家深入了解 Jest 背后的运行原理，方便应对面试和实际业务需求，Jest 编写单测相信我们已经很熟悉了，但 Jest 是如何工作的我们可能还很陌生，那让我们一起走进 Jest 内心，一同探究。
 
-先附代码给有需要的同学，欢迎关注：[https://github.com/Wscats/jest-tutorial](https://github.com/Wscats/jest-tutorial)
+先附上 Jest 核心引擎的代码实现给有需要的同学，欢迎关注和交流：[https://github.com/Wscats/jest-tutorial](https://github.com/Wscats/jest-tutorial)
 
 # 什么是 Jest
 
@@ -14,7 +14,7 @@ Jest 作为 NPM 包发布，可以安装并运行在任何 JavaScript 项目中�
 
 # 测试意味着什么
 
-在技 ​​ 术术语中，测试意味着检查我们的代码是否满足某些期望。例如：一个名为求和(`sum`)函数应该返回给定一些运算结果的预期输出。
+在技术术语中，测试意味着检查我们的代码是否满足某些期望。例如：一个名为求和(`sum`)函数应该返回给定一些运算结果的预期输出。
 
 有许多类型的测试，很快你就会被术语淹没，但长话短说的测试分为三大类：
 
