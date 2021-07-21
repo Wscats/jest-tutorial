@@ -24,9 +24,9 @@
 - [jest-runtime](#jest-runtime)
 - [最后&源码](#最后)
 
-# 深入浅出 Jest 框架的实现原理
+# 从零开始实现一个 Jest 单元测试框架
 
-本文主要给大家深入了解 Jest 背后的运行原理，方便应对面试和实际业务需求，Jest 编写单测相信我们已经很熟悉了，但 Jest 是如何工作的我们可能还很陌生，那让我们一起走进 Jest 内心，一同探究。
+本文主要给大家深入了解 Jest 背后的运行原理，并从零开始简单实现一个 Jest 单元测试的框架，方便了解单元测试引擎是如何工作的，Jest 编写单测相信我们已经很熟悉了，但 Jest 是如何工作的我们可能还很陌生，那让我们一起走进 Jest 内心，一同探究单元测试引擎是如何工作的。
 
 先附上 Jest 核心引擎的代码实现给有需要的同学，欢迎关注和交流：[https://github.com/Wscats/jest-tutorial](https://github.com/Wscats/jest-tutorial)
 
