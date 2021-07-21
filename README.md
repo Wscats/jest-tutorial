@@ -195,9 +195,30 @@ const jest = {
 
 有些同学可能留意到了，在测试框架中，我们并不需要手动引入 `test`、`expect` 和 `jest` 这些函数，每个测试文件可以直接使用，所以我们这里需要创造一个注入这些方法的运行环境。
 
-## V8 虚拟机和作用域
+## 作用域隔离
 
-既然万事俱备只欠东风，我们只需要给 V8 虚拟机注入测试所需的方法，即注入测试作用域即可。
+由于单测文件运行时候需要作用域隔离。所以在设计上测试引擎是跑在 node 全局作用域下，而测试文件的代码则跑在 node 环境里的 vm 虚拟机局部作用域中。
+
+- 全局作用域 `global`
+- 局部作用域 `context`
+
+两个作用域通过 `dispatch` 方法实现通信。
+
+`dispatch` 在 vm 局部作用域下收集测试块、生命周期和测试报告信息到 node 全局作用域 `STATE_SYMBOL` 中，所以 `dispatch` 主要涉及到以下各种通信类型：
+
+- 测试块
+  - `ADD_TEST`
+- 生命周期
+  - `BEFORE_EACH`
+  - `BEFORE_ALL`
+  - `AFTER_EACH`
+  - `AFTER_ALL`
+- 测试报告
+  - `COLLECT_REPORT`
+
+## V8 虚拟机
+
+既然万事俱备只欠东风，我们只需要给 V8 虚拟机注入测试所需的方法，即注入测试局部作用域即可。
 
 ```js
 const context = {
@@ -220,7 +241,7 @@ vm.runInContext(code, context);
 ```js
 const start = new Date();
 const end = new Date();
-log("\x1b[32m%s\x1b[0m", `Time: ${end - start}ms`);
+log("\x1b[32m%s\x1b[0m", `Time: ${end - start} ms`);
 ```
 
 ## 运行单测回调
@@ -259,10 +280,24 @@ afterAllBlock.forEach(async (afterAll) => await afterAll());
 
 # 生成报告
 
-当单测执行完后，可以收集成功和错误的信息集，然后更改 `log` 的输出流，让详细的结果打印在终端上，也可以配合 IO 模块在本地生成报告。
+当单测执行完后，可以收集成功和捕捉错误的信息集，
+
 ```js
-log("\x1b[32m%s\x1b[0m", `√ ${name} passed`);
-log("\x1b[32m%s\x1b[0m", `× ${name} error`);
+try {
+    dispatch({ type: "COLLECT_REPORT", name, pass: 1 });
+    log("\x1b[32m%s\x1b[0m", `√ ${name} passed`);
+} catch (error) {
+    dispatch({ type: "COLLECT_REPORT", name, pass: 0 });
+    log("\x1b[32m%s\x1b[0m", `× ${name} error`);
+}
+```
+
+然后劫持 `log` 的输出流，让详细的结果打印在终端上，也可以配合 IO 模块在本地生成报告。
+
+```js
+const { reports } = global["STATE_SYMBOL"];
+const pass = reports.reduce((pre, next) => pre.pass + next.pass);
+log("\x1b[32m%s\x1b[0m", `All Tests: ${pass}/${reports.length} passed`);
 ```
 
 至此，我们就实现了一个简单的 Jest 测试框架的核心部分，以上部分基本实现了测试块、断言、匹配器、CLI配置、函数模拟、使用虚拟机及作用域和生命周期钩子函数等，我们可以在此基础上，丰富断言方法，匹配器和支持参数配置，当然实际 Jest 的实现会更复杂，我只提炼了比较关键的部分，所以附上本人读 Jest 源码的个人笔记供大家参考。
