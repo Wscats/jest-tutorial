@@ -534,15 +534,16 @@ const runtime = new Runtime(
 - global.queueMicrotask
 - global.AbortController
 
+`testConsole` 本质上是使用 node 的 console 改写，方便后续覆盖 vm 作用域里面的 console 方法
+
 ```ts
-// 本质上是使用 node 的 console 改写，方便后续覆盖 vm 作用域里面的 console 方法
 testConsole = new BufferedConsole();
 const environment = new TestEnvironment(config, {
-  console: testConsole, // 疑似无用的代码
+  console: testConsole,
   docblockPragmas,
   testPath: path,
 });
-// 真正改写 console 的方法
+// 真正改写 console 地方的方法
 setGlobal(environment.global, "console", testConsole);
 ```
 
