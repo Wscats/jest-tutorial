@@ -4,7 +4,9 @@
   "description": "",
   "main": "jest.js",
   "scripts": {
-    "dev": "node jest ./test.spec.js"
+    "dev": "node jest ./test.spec.js",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx --fix",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Wscats/jest-tutorial/issues"
   },
-  "homepage": "https://github.com/Wscats/jest-tutorial#readme"
+  "homepage": "https://github.com/Wscats/jest-tutorial#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
