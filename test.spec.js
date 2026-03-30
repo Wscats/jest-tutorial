@@ -1,3 +1,5 @@
+'use strict';
+
 jest.mock('fs', {
     readFile: jest.fn(() => 'wscats'),
 });
